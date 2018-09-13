@@ -1,19 +1,50 @@
 class Mehrsprachig {
-    constructor({fetch = true, sources = ['/i18n/de.json', '/i18n/en.json']} = {}) {
+    constructor({
+        fallback = 'de',
+        language = 'de',
+        fetch = true,
+        sources = {
+            de: '/api/de/site',
+            en: '/api/en/site'
+        },
+        selector = '[data-mehrsprachig]'
+    } = {}) {
         this.fetch = fetch;
         this.sources = sources;
+        this.fallback = fallback;
+        this.language = language;
+        this.locales = {};
+        this.nodes = document.querySelectorAll(selector);
 
-        if (this.fetch) {
-            this.fetchSources();
-        }
+        this.bootstrap();
     }
 
-    async fetchSources() {
-        for (const source of this.sources) {
-            const req = await fetch(source);
-            const res = await req.json();
+    async setLanguage(language) {
+        this.language = language;
 
-            console.log(res);
+        if (!this.locales[this.language]) {
+            await this.getLocale();
+        }
+
+        this.localize();
+    }
+
+    async bootstrap() {
+        await this.getLocale();
+        this.localize();
+    }
+
+    async getLocale() {
+        const req = await fetch(this.sources[this.language]);
+        const res = await req.json();
+
+        this.locales[this.language] = res;
+    }
+
+    localize() {
+        for (const node of this.nodes.values()) {
+            const prop = node.dataset.mehrsprachig;
+            node.textContent = this.locales[this.language][prop]
         }
     }
 }
