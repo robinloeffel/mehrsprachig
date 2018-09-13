@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-
 class Mehrsprachig {
     constructor({fetch = true, sources = ['/i18n/de.json', '/i18n/en.json']} = {}) {
         this.fetch = fetch;
@@ -11,7 +9,7 @@ class Mehrsprachig {
     }
 
     async fetchSources() {
-        for (source in this.sources) {
+        for (const source of this.sources) {
             const req = await fetch(source);
             const res = await req.json();
 
@@ -20,4 +18,4 @@ class Mehrsprachig {
     }
 }
 
-export default config = new Mehrsprachig(config);
+export default Mehrsprachig;

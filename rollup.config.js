@@ -18,7 +18,7 @@ export default {
         file: 'mehrsprachig.es.js',
         format: 'es'
     }), mergeConfigs({
-        name: 'mehrsprachig',
+        name: 'Mehrsprachig',
         file: 'mehrsprachig.iife.js',
         format: 'iife'
     }) ]

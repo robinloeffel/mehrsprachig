@@ -1,4 +1,4 @@
-{
+export default {
 	extends: 'eslint:recommended',
 	parser: 'babel-eslint',
 	env: {
@@ -16,4 +16,4 @@
 		'no-multi-assign': 2,
 		quotes: [2, 'single']
 	}
-}
+};
