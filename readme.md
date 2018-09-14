@@ -8,7 +8,9 @@ import Mehrsprachig from 'mehrsprachig';
 
 const mehrsprachig = new Mehrsprachig();
 ```
-It's just a class you'll have to instatiate. After that it's as easy as attaching an event listener to some node and calling the one exposed method, `setLanguage`:
+Or if that whole module bundling thingy is not your pint of beer—I gotchu, fam! Add `<script src="//unpkg.com/mehrsprachig"></script>` at the end of your HTML instead of using yarn or npm.
+
+`Mehrsprachig` is a class you'll have to instatiate. After that it's as easy as attaching an event listener to some node and calling the one exposed method, `setLanguage`:
 ```js
 const koreanButton = document.querySelector('[data-mehrsprachig-korean]');
 
