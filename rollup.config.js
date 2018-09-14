@@ -1,6 +1,6 @@
-// import babel from 'rollup-plugin-babel';
-// import resolve from 'rollup-plugin-node-resolve';
-// import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 // import { uglify } from 'rollup-plugin-uglify';
 import { eslint } from 'rollup-plugin-eslint';
 
@@ -21,5 +21,10 @@ export default {
         file: 'mehrsprachig.umd.js',
         format: 'umd'
     }) ],
-    plugins: [ eslint() ]
+    plugins: [
+        eslint(),
+        resolve(),
+        commonjs(),
+        babel()
+    ]
 };
