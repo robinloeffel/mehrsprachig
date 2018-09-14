@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel';
+// import babel from 'rollup-plugin-babel';
 // import resolve from 'rollup-plugin-node-resolve';
 // import commonjs from 'rollup-plugin-commonjs';
 // import { uglify } from 'rollup-plugin-uglify';
@@ -18,8 +18,8 @@ export default {
         format: 'es'
     }), mergeConfigs({
         name: 'Mehrsprachig',
-        file: 'mehrsprachig.iife.js',
-        format: 'iife'
+        file: 'mehrsprachig.umd.js',
+        format: 'umd'
     }) ],
     plugins: [ eslint() ]
 };
