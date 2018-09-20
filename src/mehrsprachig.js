@@ -21,6 +21,7 @@ class Mehrsprachig {
 
     async setLanguage(language) {
         this.language = language;
+        localStorage.setItem('mehrsprachig', language);
 
         if (!this.locales[this.language]) {
             await this.getLocale();
@@ -30,6 +31,7 @@ class Mehrsprachig {
     }
 
     async bootstrap() {
+        this.language = localStorage.getItem('mehrsprachig') ? localStorage.getItem('mehrsprachig') : this.language;
         await this.getLocale();
         this.localize();
     }

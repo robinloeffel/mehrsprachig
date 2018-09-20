@@ -8,5 +8,6 @@ module.exports = {
             },
             useBuiltIns: 'usage'
         }]
-    ]
+    ],
+    ignore: [ 'node_modules' ]
 };
