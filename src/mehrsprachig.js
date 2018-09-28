@@ -7,7 +7,8 @@ class Mehrsprachig {
             de: '/api/de/site',
             en: '/api/en/site'
         },
-        selector = '[data-mehrsprachig]'
+        selector = '[data-mehrsprachig]',
+        attributes = '[data-mehrsprachig-attributes]'
     } = {}) {
         this.fetch = fetch;
         this.sources = sources;
@@ -15,6 +16,7 @@ class Mehrsprachig {
         this.language = language;
         this.locales = {};
         this.nodes = document.querySelectorAll(selector);
+        this.attributes = document.querySelectorAll(attributes);
 
         this.bootstrap();
     }
@@ -47,6 +49,17 @@ class Mehrsprachig {
         for (const node of this.nodes.values()) {
             const prop = node.dataset.mehrsprachig;
             node.textContent = this.locales[this.language][prop]
+        }
+
+        for (const node of this.attributes.values()) {
+            const atrributesArray = node.dataset.mehrsprachigAttributes.replace(/ /g, '').split(',');
+
+            for (const attributeValuePair of atrributesArray) {
+                const attribute = attributeValuePair.split(':')[0];
+                const value = attributeValuePair.split(':')[1];
+
+                node.setAttribute(attribute, this.locales[this.language][value]);
+            }
         }
     }
 }
