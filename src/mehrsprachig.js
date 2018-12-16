@@ -7,8 +7,7 @@ class Mehrsprachig {
             de: '/api/de/site',
             en: '/api/en/site'
         },
-        selector = '[data-mehrsprachig]',
-        attributes = '[data-mehrsprachig-attributes]'
+        selector = '[data-mehrsprachig]'
     } = {}) {
         this.fetch = fetch;
         this.sources = sources;
@@ -16,7 +15,6 @@ class Mehrsprachig {
         this.language = language;
         this.locales = {};
         this.nodes = document.querySelectorAll(selector);
-        this.attributes = document.querySelectorAll(attributes);
 
         this.bootstrap();
     }
@@ -47,18 +45,20 @@ class Mehrsprachig {
 
     localize() {
         for (const node of this.nodes.values()) {
-            const prop = node.dataset.mehrsprachig;
-            node.textContent = this.locales[this.language][prop]
-        }
+            const values = node.dataset.mehrsprachig.replace(/ /g, '').split(',');
 
-        for (const node of this.attributes.values()) {
-            const atrributesArray = node.dataset.mehrsprachigAttributes.replace(/ /g, '').split(',');
+            for (const item of values) {
+                if (item.includes('=')) {
+                    // when an item be a attibute=value pair
+                    const attribute = item.split('=')[0];
+                    const value = item.split('=')[1];
 
-            for (const attributeValuePair of atrributesArray) {
-                const attribute = attributeValuePair.split(':')[0];
-                const value = attributeValuePair.split(':')[1];
-
-                node.setAttribute(attribute, this.locales[this.language][value]);
+                    node.setAttribute(attribute, this.locales[this.language][value]);
+                } else {
+                    // when it be a single value item
+                    // sometimes it really do be like dat
+                    node.textContent = this.locales[this.language][item];
+                }
             }
         }
     }
