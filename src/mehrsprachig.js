@@ -1,37 +1,37 @@
 class Mehrsprachig {
     constructor({
-        fallback = 'de',
-        language = 'de',
-        fetch = true,
+        language = 'browser',
         sources = {
-            de: '/api/de/site',
-            en: '/api/en/site'
+            'de': '/api/de',
+            'en': '/api/en'
         },
         selector = '[data-mehrsprachig]'
     } = {}) {
-        this.fetch = fetch;
         this.sources = sources;
-        this.fallback = fallback;
         this.language = language;
+        this.selector = selector;
         this.locales = {};
-        this.nodes = document.querySelectorAll(selector);
+        this.nodes = [];
 
         this.bootstrap();
     }
 
     async setLanguage(language) {
         this.language = language;
-        localStorage.setItem('mehrsprachig', language);
 
         if (!this.locales[this.language]) {
             await this.getLocale();
         }
 
+        localStorage.setItem('mehrsprachig', language);
+
         this.localize();
     }
 
     async bootstrap() {
-        this.language = localStorage.getItem('mehrsprachig') ? localStorage.getItem('mehrsprachig') : this.language;
+        this.determineLanguage();
+        this.nodes = document.querySelectorAll(this.selector);
+
         await this.getLocale();
         this.localize();
     }
@@ -60,6 +60,14 @@ class Mehrsprachig {
                     node.textContent = this.locales[this.language][item];
                 }
             }
+        }
+    }
+
+    determineLanguage() {
+        if (this.language === 'browser' && !localStorage.getItem('mehrsprachig')) {
+            this.language = navigator.language.toLowerCase();
+        } else {
+            this.language = localStorage.getItem('mehrsprachig');
         }
     }
 }
