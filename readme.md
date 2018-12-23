@@ -1,5 +1,5 @@
 # mehrsprachig
-_Mehrsprachig_ is the German word for multilingual. Fittingly enough, this little package here allows you to add several localizations to your app or website in just the blink of an eye. It will make your creation _mehrsprachig_, so to speak.
+_Mehrsprachig_ is the German word for multilingual. So as you might've already guessed, this little package here allows you to add several localizations to your app or website in just the blink of an eye. It will make your creation _mehrsprachig_, so to speak.
 
 ## But how, hermano?
 Mira! Install it via `yarn add mehrsprachig` or `npm i mehrsprachig` and use it as follows:
@@ -8,71 +8,70 @@ import Mehrsprachig from 'mehrsprachig';
 
 const mehrsprachig = new Mehrsprachig();
 ```
-Or if that whole module bundling thingy is not your pint of beer—I gotchu, fam! Add `<script src="//unpkg.com/mehrsprachig"></script>` at the end of your HTML instead of using yarn or npm.
-
-`Mehrsprachig` is a class you'll have to instatiate. After that it's as easy as attaching an event listener to some node and calling the one exposed method, `setLanguage`:
+Or if that whole module bundling thingy is not thang—no worries! Add `<script src="//unpkg.com/mehrsprachig"></script>` to your document instead of using yarn or npm. Then you can use it via
 ```js
-const koreanButton = document.querySelector('[data-mehrsprachig-korean]');
+var mehrsprachig = new Mehrsprachig();
+```
+
+`Mehrsprachig` is a class you'll have to instatiate. After that it's as easy as attaching an event listener to some nodes, calling the one exposed method, `setLanguage`, and marking your to-be-translated nodes by giving them `[data-mehrsprachig]`:
+```js
+const koreanButton = document.querySelector('[korean-button]');
 
 koreanButton.addEventListener('click', () => mehrsprachig.setLanguage('kr'));
 ```
-Oh, well, one other thing! Of course you'll need to add the `data-mehrsprachig` attribute to your soon-to-be-translated node—with the value of the key of your wished-upon text property:
+
 ```html
-<h1 data-mehrsprachig="greeting">I'll get replaced with language.greeting<h1>
+<h1 data-mehrsprachig="greeting">I'll get replaced with ${language.greeting}<h1>
 ```
-But that's it, my dude, I promise!
+For the most basic use cases, that's it! All your texts will be dynamically changed whenever you call `setLanguage` on one of your language switchers!
+
+## What about attributes?
+Of course you can even localize attributes, if you wish to do so, fratello! This makes sense for `meta` attributes or the `lang` attribute of your `html` node. Dis can be achieved like dat:
+```html
+<!-- translate an attribute -->
+<meta name="description" data-mehrsprachig="content=description">
+
+<!-- translate an attribute and the text content -->
+<h2 data-mehrsprachig="data-node-language=language, heading">
+```
+
+You can localize as many attributes as you want. Just make sure you follow the pattern of `attribute=localizationKey` inside `data-mehrsprachig` and separate them with a `,`. A single localizationKey key will always try and change the text content of the node.
+
+**It is not recommended to localize the class attribute, as _mehrsprachig_ will completely overwrite the attributes its set to change!**
 
 ## Et la configuration?
 Naturellement, tu peux configurer _mehrsprachig_! The following options are available when instantiating:
 ```js
-{
-    selector: '[data-mehrsprachig]',
-    fallback: 'de',
-    language: 'de',
-    fetch: true,
-    sources: {
-        de: '/api/de',
-        en: '/api/en'
-    }
-}
-```
-You can pick and choose which one of these properties you want to change. The values you see here are the defaults.
-
-- `selector` tells _mehrsprachig_ what elements to localize
-- `fallback` tells _mehrsprachig_ what language it should fall back in case of an error
-- `language` the language you want to start off with; it gets fetched immediately
-- `fetch` whether or not you need _mehrsprachig_ to issue requests to get your localizations
-- `sources` shows _mehrsprachig_ where to fetch the mentioned languages (in this example German and English) from. If `fetch` is `false`, put your localizations in here directly as an object
-
-## Localizations?
-Ja, Kollege. With `localization` I mean an object containing all of your translated texts in a specific language. Heres two example responses:
-```js
-// domain.io/i18n/english
-{
-    greeting: 'Hello, world!',
-    question: 'How are you?'
-}
-
-// domain.io/i18n/german
-{
-    greeting: 'Hallo, Welt!',
-    question: 'Wie geht\'s dir?'
-}
-```
-You'll need to structure your localizations the same way, so _mehrsprachig_ can easily and performantly search through them. An example on how to configure _mehrsprachig_ so it doesn't fetch your localizations and with a different selector looks like this:
-```js
-import Mehrsprachig from 'mehrsprachig';
-
 const mehrsprachig = new Mehrsprachig({
-    selector: '[data-multilingual]',
-    fetch: false,
+    selector: '[data-mehrsprachig]',
+    language: 'browser',
     sources: {
-        de: {
-            hello: 'Hallo'
-        },
-        es: {
-            hello: 'Hola'
-        }
+        'de-ch': '/api/de',
+        'fr-ch': '/api/en',
+        'it-ch': '/api/it',
+        'en-gb': '/api/en'
     }
 });
 ```
+You can pick and choose which one of these properties you want to change. The values you see here, except for `sources`, are the defaults.
+
+- `selector` [cssSelector]: tells _mehrsprachig_ what elements to localize
+- `language` [string]: the language you want to start off with; it gets fetched immediately
+- `sources` [object]: shows _mehrsprachig_ where to fetch the mentioned languages from. You can also directly put your JSON-formatted localizations here.
+
+## Localizations?
+Ja, Brudi. With `localization` I mean an object containing all of your translated texts in a specific language. Heres two example localizations, for German and English:
+```json
+// domain.io/api/de
+{
+    "greeting": "Hallo, Welt!",
+    "question": "How are you?"
+}
+
+// domain.io/api/en
+{
+    "greeting": "Hello, world!",
+    "question": "How are you?"
+}
+```
+You'll need to structure all your localizations the same way, so _mehrsprachig_ can easily and performantly search through them.
