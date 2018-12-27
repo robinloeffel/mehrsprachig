@@ -53,22 +53,37 @@ class Mehrsprachig {
                     const attribute = item.split('=')[0];
                     const value = item.split('=')[1];
 
-                    node.setAttribute(attribute, this.locales[this.language][value]);
+                    node.setAttribute(attribute, this.getLocalized(value));
                 } else {
                     // when it be a single value item
                     // sometimes it really do be like dat
-                    node.textContent = this.locales[this.language][item];
+                    node.textContent = this.getLocalized(item);
                 }
             }
         }
+
+        document.documentElement.setAttribute('lang', this.language);
     }
 
     determineLanguage() {
-        if (this.language === 'browser' && !localStorage.getItem('mehrsprachig')) {
+        if (this.language === 'browser') {
             this.language = navigator.language.toLowerCase();
-        } else {
+        }
+
+        if (localStorage.getItem('mehrsprachig')) {
             this.language = localStorage.getItem('mehrsprachig');
         }
+    }
+
+    getLocalized(value) {
+        const properties = value.split('.');
+        let localized = this.locales[this.language];
+
+        for (const property of properties) {
+            localized = localized[property];
+        }
+
+        return localized;
     }
 }
 
