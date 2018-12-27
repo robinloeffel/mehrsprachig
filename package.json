@@ -2,14 +2,14 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "license": "MIT",
     "homepage": "https://robinloeffel.ch/misc/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
     "module": "dist/mehrsprachig.es.js",
     "browser": "dist/mehrsprachig.umd.js",
     "files": [
-        "dist"
+        "dist/mehrsprachig.*"
     ],
     "keywords": [
         "localization",
