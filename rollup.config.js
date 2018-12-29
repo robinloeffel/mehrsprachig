@@ -33,7 +33,7 @@ export default [{
         dir: 'dist',
         sourcemap: true,
         name: 'Mehrsprachig',
-        file: pkg.browser,
+        file: pkg.main,
         format: 'umd'
     }
 }];
