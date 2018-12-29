@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { uglify } from 'rollup-plugin-uglify';
 import { eslint } from 'rollup-plugin-eslint';
+import pkg from './package.json';
 
 // two separate objects for two separate outputs
 // firstly esnext for bundlers, then umd for browsers
@@ -16,7 +17,7 @@ export default [{
     output: {
         dir: 'dist',
         sourcemap: true,
-        file: 'mehrsprachig.es.js',
+        file: pkg.module,
         format: 'es'
     }
 }, {
@@ -32,7 +33,7 @@ export default [{
         dir: 'dist',
         sourcemap: true,
         name: 'Mehrsprachig',
-        file: 'mehrsprachig.umd.js',
+        file: pkg.browser,
         format: 'umd'
     }
 }];

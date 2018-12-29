@@ -1,3 +1,6 @@
+import 'whatwg-fetch';
+import 'promise-polyfill/src/polyfill';
+
 class Mehrsprachig {
     constructor({
         language = 'browser',
