@@ -2,7 +2,7 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "license": "MIT",
     "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
@@ -42,6 +42,7 @@
         "build": "rollup -c",
         "watch": "rollup -c -w",
         "serve": "serve dist",
-        "start": "run-p watch serve"
+        "start": "run-p watch serve",
+        "prepublish": "yarn build"
     }
 }
