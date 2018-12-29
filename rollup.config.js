@@ -15,7 +15,6 @@ export default [{
         commonjs()
     ],
     output: {
-        dir: 'dist',
         sourcemap: true,
         file: pkg.module,
         format: 'es'
@@ -30,10 +29,9 @@ export default [{
         uglify()
     ],
     output: {
-        dir: 'dist',
         sourcemap: true,
-        name: 'Mehrsprachig',
         file: pkg.main,
-        format: 'umd'
+        format: 'umd',
+        name: 'Mehrsprachig'
     }
 }];
