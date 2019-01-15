@@ -2,14 +2,15 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.2.4",
+    "version": "0.3.0",
     "license": "MIT",
     "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
+    "entry": "src/mehrsprachig.mjs",
     "main": "dist/mehrsprachig.umd.js",
     "unpkg": "dist/mehrsprachig.umd.js",
-    "module": "dist/mehrsprachig.esm.js",
-    "jsnext:main": "dist/mehrsprachig.esm.js",
+    "module": "dist/mehrsprachig.esm.mjs",
+    "jsnext:main": "dist/mehrsprachig.esm.mjs",
     "files": [
         "dist/mehrsprachig.*"
     ],
@@ -30,12 +31,12 @@
         "@babel/preset-env": "^7.2.3",
         "babel-eslint": "^10.0.1",
         "npm-run-all": "^4.1.5",
-        "rollup": "^1.0.0",
-        "rollup-plugin-babel": "^4.1.0",
+        "rollup": "^1.1.0",
+        "rollup-plugin-babel": "^4.3.0",
         "rollup-plugin-commonjs": "^9.2.0",
         "rollup-plugin-eslint": "^5.0.0",
         "rollup-plugin-node-resolve": "^4.0.0",
-        "rollup-plugin-uglify": "^6.0.0",
+        "rollup-plugin-uglify": "^6.0.1",
         "serve": "^10.1.1"
     },
     "scripts": {
@@ -43,6 +44,7 @@
         "watch": "rollup -c -w",
         "serve": "serve dist",
         "start": "run-p watch serve",
+        "update": "yarn upgrade-interactive --latest",
         "prepublish": "yarn build"
     }
 }

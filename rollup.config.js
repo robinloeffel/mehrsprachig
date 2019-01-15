@@ -8,7 +8,7 @@ import pkg from './package.json';
 // two separate objects for two separate outputs
 // firstly esnext for bundlers, then umd for browsers
 export default [{
-    input: 'src/mehrsprachig.js',
+    input: pkg.entry,
     plugins: [
         eslint(),
         resolve(),
@@ -20,7 +20,7 @@ export default [{
         format: 'es'
     }
 }, {
-    input: 'src/mehrsprachig.js',
+    input: pkg.entry,
     plugins: [
         eslint(),
         resolve(),
