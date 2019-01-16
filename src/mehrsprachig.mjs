@@ -52,15 +52,21 @@ class Mehrsprachig {
 
             for (const item of values) {
                 if (item.includes('=')) {
-                    // when an item be a attibute=value pair
+                    // when an item is an attibute=value pair
                     const attribute = item.split('=')[0];
                     const value = item.split('=')[1];
 
                     node.setAttribute(attribute, this.getLocalized(value));
                 } else {
-                    // when it be a single value item
-                    // sometimes it really do be like dat
-                    node.textContent = this.getLocalized(item);
+                    // when an item is just a value
+                    if (item.includes(':html')) {
+                        // when the item contains `:html`, replace the innerHTML
+                        const html = item.replace(/:html/g, '');
+                        node.innerHTML = this.getLocalized(html);
+                    } else {
+                        // else just the text
+                        node.textContent = this.getLocalized(item);
+                    }
                 }
             }
         }
