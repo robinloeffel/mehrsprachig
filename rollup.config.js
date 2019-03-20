@@ -6,19 +6,19 @@ import { eslint } from 'rollup-plugin-eslint';
 import pkg from './package.json';
 
 // two separate objects for two separate outputs
-// firstly esnext for bundlers, then umd for browsers
+// firstly esnext and cjs for bundlers, then umd for browsers
+// treat whatwg-fetch as external, so the bundlers can import it themselves
 export default [{
     input: pkg.entry,
-    plugins: [
-        eslint(),
-        resolve(),
-        commonjs()
-    ],
-    output: {
-        sourcemap: true,
+    output: [{
         file: pkg.module,
         format: 'es'
-    }
+    }, {
+        sourcemap: true,
+        file: pkg.main,
+        format: 'cjs'
+    }],
+    external: [ 'whatwg-fetch' ]
 }, {
     input: pkg.entry,
     plugins: [
@@ -30,7 +30,7 @@ export default [{
     ],
     output: {
         sourcemap: true,
-        file: pkg.main,
+        file: pkg.browser,
         format: 'umd',
         name: 'Mehrsprachig'
     }
