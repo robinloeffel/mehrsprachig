@@ -2,14 +2,13 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "license": "MIT",
     "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
     "entry": "src/mehrsprachig.js",
-    "main": "dist/mehrsprachig.cjs.js",
     "module": "dist/mehrsprachig.esm.js",
-    "browser": "dist/mehrsprachig.umd.js",
+    "unpkg": "dist/mehrsprachig.umd.js",
     "files": [
         "dist/mehrsprachig.*"
     ],
@@ -26,7 +25,7 @@
     "devDependencies": {
         "@babel/core": "^7.4.0",
         "@babel/polyfill": "^7.4.0",
-        "@babel/preset-env": "^7.4.1",
+        "@babel/preset-env": "^7.4.2",
         "babel-eslint": "^10.0.1",
         "core-js": "^3.0.0",
         "npm-run-all": "^4.1.5",
