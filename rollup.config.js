@@ -29,7 +29,7 @@ export default [{
     ],
     output: {
         sourcemap: true,
-        file: pkg.main,
+        file: pkg.browser,
         format: 'umd',
         name: 'Mehrsprachig'
     }

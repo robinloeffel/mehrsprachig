@@ -2,7 +2,7 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "license": "MIT",
     "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
