@@ -2,13 +2,13 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.4.2",
+    "version": "0.4.3",
     "license": "MIT",
     "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
     "repository": "rbnlffl/mehrsprachig",
     "entry": "src/mehrsprachig.js",
     "module": "dist/mehrsprachig.esm.js",
-    "unpkg": "dist/mehrsprachig.umd.js",
+    "main": "dist/mehrsprachig.umd.js",
     "files": [
         "dist/mehrsprachig.*"
     ],
@@ -23,19 +23,19 @@
         "whatwg-fetch": "^3.0.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.4.0",
-        "@babel/polyfill": "^7.4.0",
-        "@babel/preset-env": "^7.4.2",
+        "@babel/core": "^7.4.3",
+        "@babel/polyfill": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
         "babel-eslint": "^10.0.1",
         "core-js": "^3.0.0",
         "npm-run-all": "^4.1.5",
-        "rollup": "^1.7.0",
+        "rollup": "^1.9.0",
         "rollup-plugin-babel": "^4.3.2",
-        "rollup-plugin-commonjs": "^9.2.1",
-        "rollup-plugin-eslint": "^5.0.0",
-        "rollup-plugin-node-resolve": "^4.0.1",
+        "rollup-plugin-commonjs": "^9.3.4",
+        "rollup-plugin-eslint": "^5.1.0",
+        "rollup-plugin-node-resolve": "^4.1.0",
         "rollup-plugin-terser": "^4.0.4",
-        "serve": "^10.1.2"
+        "serve": "^11.0.0"
     },
     "scripts": {
         "clean": "rm -rf dist",

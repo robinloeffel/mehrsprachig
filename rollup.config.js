@@ -26,7 +26,7 @@ export default [{
     ],
     output: {
         sourcemap: true,
-        file: pkg.unpkg,
+        file: pkg.main,
         format: 'umd',
         name: 'Mehrsprachig'
     }
