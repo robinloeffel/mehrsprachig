@@ -10,10 +10,13 @@ import pkg from './package.json';
 // treat whatwg-fetch as external, so the bundlers can import it themselves
 export default [{
     input: pkg.entry,
-    output: {
+    output: [{
         file: pkg.module,
         format: 'es'
-    },
+    }, {
+        file: pkg.main,
+        format: 'cjs'
+    }],
     external: [ 'whatwg-fetch' ]
 }, {
     input: pkg.entry,
