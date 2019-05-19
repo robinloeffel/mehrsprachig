@@ -3,7 +3,7 @@ module.exports = {
     presets: [
         ['@babel/preset-env', {
             useBuiltIns: 'usage',
-            corejs: 2
+            corejs: 3
         }]
     ],
     ignore: [ 'node_modules' ]

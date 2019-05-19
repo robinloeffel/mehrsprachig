@@ -5,18 +5,16 @@ import { terser } from 'rollup-plugin-terser';
 import { eslint } from 'rollup-plugin-eslint';
 import pkg from './package.json';
 
-// two separate objects for two separate outputs
-// firstly esnext and cjs for bundlers, then umd for browsers
-// treat non-babel polyfills as external, so the bundlers can import them themselves
+const prod = process.env.PRODUCTION === 'true';
+
+
 export default [{
     input: pkg.entry,
-    output: [{
+    output: {
+        sourcemap: true,
         file: pkg.module,
         format: 'es'
-    }, {
-        file: pkg.main,
-        format: 'cjs'
-    }],
+    },
     external: [
         'whatwg-fetch',
         'es6-promise/auto'
@@ -28,10 +26,10 @@ export default [{
         resolve(),
         commonjs(),
         babel(),
-        terser()
+        ...(prod ? [terser()] : [])
     ],
     output: {
-        sourcemap: true,
+        sourcemap: prod ? false : true,
         file: pkg.browser,
         format: 'umd',
         name: 'Mehrsprachig'
