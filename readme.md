@@ -1,5 +1,5 @@
 # mehrsprachig
-![](https://img.shields.io/github/license/rbnlffl/mehrsprachig.svg) ![](https://img.shields.io/npm/v/mehrsprachig.svg) ![](https://img.shields.io/npm/dm/mehrsprachig.svg)
+[![](https://img.shields.io/github/license/rbnlffl/mehrsprachig.svg)](https://github.com/rbnlffl/mehrsprachig/blob/master/license.md) [![](https://img.shields.io/npm/v/mehrsprachig.svg)](https://www.npmjs.com/package/mehrsprachig) [![](https://img.shields.io/npm/dm/mehrsprachig.svg)](https://www.npmjs.com/package/mehrsprachig)
 
 _Mehrsprachig_ is the German word for multilingual. So as you might've already guessed, this little package here (11kb minified + gzip/br) allows you to add several localizations to your app or website in just the blink of an eye. It will make your creation _mehrsprachig_, so to speak.
 
