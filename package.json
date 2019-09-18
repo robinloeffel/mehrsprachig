@@ -42,9 +42,10 @@
         "clean": "rm -rf dist & rm -f page/mehrsprachig.browser.*",
         "build:dev": "rollup -c -w",
         "build:prod": "rollup -c -w --environment prod",
+        "build:dist": "rollup -c --environment prod",
         "serve": "http-server page -g -s -o",
         "dev": "yarn clean && yarn build:dev & yarn serve",
         "prod": "yarn clean && yarn build:prod & yarn serve",
-        "dist": "yarn clean && yarn build:prod && surge page && yarn publish"
+        "dist": "yarn clean && yarn build:dist && surge page && yarn publish"
     }
 }
