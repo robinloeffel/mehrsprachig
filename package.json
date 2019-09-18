@@ -2,15 +2,15 @@
     "name": "mehrsprachig",
     "description": "The simplest way to make your app speak several languages",
     "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
-    "version": "0.4.8",
+    "version": "0.5.0",
     "license": "MIT",
-    "homepage": "https://dev.robinloeffel.ch/mehrsprachig",
+    "homepage": "https://mehrsprachig.surge.sh",
     "repository": "rbnlffl/mehrsprachig",
     "entry": "src/mehrsprachig.js",
-    "module": "dist/mehrsprachig.esm.js",
-    "browser": "dist/mehrsprachig.umd.js",
+    "main": "dist/mehrsprachig.module.js",
+    "unpkg": "dist/mehrsprachig.browser.js",
     "files": [
-        "dist/mehrsprachig.*"
+        "dist"
     ],
     "keywords": [
         "localization",
@@ -23,30 +23,28 @@
         "whatwg-fetch": "^3.0.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.5.5",
-        "@babel/polyfill": "^7.4.4",
-        "@babel/preset-env": "^7.5.5",
+        "@babel/core": "^7.6.0",
+        "@babel/polyfill": "^7.6.0",
+        "@babel/preset-env": "^7.6.0",
         "babel-eslint": "^10.0.3",
         "core-js": "^3.2.1",
-        "eslint": "^6.3.0",
-        "lite-server": "^2.5.4",
-        "npm-run-all": "^4.1.5",
-        "rollup": "^1.20.3",
+        "eslint": "^6.4.0",
+        "http-server": "^0.11.1",
+        "rollup": "^1.21.4",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-copy": "^3.1.0",
         "rollup-plugin-eslint": "^7.0.0",
         "rollup-plugin-node-resolve": "^5.2.0",
-        "rollup-plugin-terser": "^5.1.1"
+        "rollup-plugin-terser": "^5.1.2"
     },
     "scripts": {
-        "clean": "rm -rf dist",
-        "copy": "mkdir -p dist; cp index.html *.json .surgeignore cname dist",
-        "build": "rollup -c",
-        "watch": "rollup -c -w",
-        "serve": "lite-server --baseDir='dist'",
-        "start": "run-p clean watch copy serve",
-        "dist": "run-p clean 'watch --environment PRODUCTION' copy serve",
-        "update": "yarn upgrade-interactive --latest",
-        "prepublish": "yarn clean && yarn build"
+        "clean": "rm -rf dist & rm -f page/mehrsprachig.browser.*",
+        "build:dev": "rollup -c -w",
+        "build:prod": "rollup -c -w --environment prod",
+        "serve": "http-server page -g -s -o",
+        "dev": "yarn clean && yarn build:dev & yarn serve",
+        "prod": "yarn clean && yarn build:prod & yarn serve",
+        "dist": "yarn clean && yarn build:prod && surge page && yarn publish"
     }
 }

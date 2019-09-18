@@ -1,17 +1,19 @@
 import 'whatwg-fetch';
 
-class Mehrsprachig {
+export default class Mehrsprachig {
     constructor({
         language = 'browser',
         sources = {
             'de': '/api/de',
             'en': '/api/en'
         },
-        selector = '[data-mehrsprachig]'
+        selector = '[data-mehrsprachig]',
+        hash = false
     } = {}) {
         this.sources = sources;
         this.language = language;
         this.selector = selector;
+        this.hash = hash;
         this.locales = {};
         this.nodes = [];
 
@@ -94,5 +96,3 @@ class Mehrsprachig {
         return localized;
     }
 }
-
-export default Mehrsprachig;
