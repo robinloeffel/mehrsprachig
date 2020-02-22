@@ -1,60 +1,26 @@
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import buble from '@rollup/plugin-buble';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { eslint } from 'rollup-plugin-eslint';
-import copy from 'rollup-plugin-copy';
-import { entry, module as esm, unpkg as iife , main as cjs } from './package.json';
 
+const dev = process.env.dev === 'true';
 
-const prod = process.env.prod === 'true';
-const copyConfig = {
-  targets: [{
-    src: 'dist/mehrsprachig.iife.*',
-    dest: 'page'
-  }],
-  hook: 'writeBundle'
-};
-
-
-export default [{
-    input: entry,
+export default {
+    input: 'mehrsprachig.js',
     plugins: [
-        eslint()
-    ],
+        eslint(),
+        resolve(),
+        commonjs(),
+        !dev && buble(),
+        !dev && terser({
+            output: { comments: false }
+        })
+    ].filter(p => p),
     output: {
         sourcemap: true,
-        file: esm,
-        format: 'es'
-    },
-    external: [
-        'whatwg-fetch',
-    ]
-}, {
-    input: entry,
-    plugins: [
-        resolve(),
-        commonjs(),
-        babel(),
-        prod && terser(),
-        copy(copyConfig)
-    ],
-    output: {
-        sourcemap: !prod,
-        file: iife,
         format: 'iife',
-        name: 'Mehrsprachig'
+        name: 'mehrsprachig',
+        file: 'public/mehrsprachig.js'
     }
-}, {
-    input: entry,
-    plugins: [
-        resolve(),
-        commonjs(),
-        babel()
-    ],
-    output: {
-        sourcemap: !prod,
-        file: cjs,
-        format: 'cjs'
-    }
-}];
+};
