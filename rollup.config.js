@@ -6,7 +6,7 @@ import { eslint } from 'rollup-plugin-eslint';
 
 const dev = process.env.dev === 'true';
 
-export default {
+const config = {
     input: 'mehrsprachig.js',
     plugins: [
         eslint(),
@@ -21,6 +21,24 @@ export default {
         sourcemap: true,
         format: 'iife',
         name: 'mehrsprachig',
-        file: 'public/mehrsprachig.js'
+        file: 'public/mehrsprachig.iife.js'
     }
 };
+
+if (!dev) {
+    config.push({
+        input: 'mehrsprachig.js',
+        plugins: [
+            resolve(),
+            commonjs(),
+            buble()
+        ],
+        output: {
+            sourcemap: true,
+            format: 'cjs',
+            file: 'public/mehrsprachig.cjs.js'
+        }
+    });
+}
+
+export default config;

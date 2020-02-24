@@ -1,15 +1,18 @@
 {
     "name": "mehrsprachig",
-    "description": "The simplest way to make your app speak several languages",
-    "author": "Robin Löffel <hi@robinloeffel.ch> (https://robinloeffel.ch)",
     "version": "0.6.0",
+    "description": "The simplest way to make your app speak several languages",
+    "main": "public/mehrsprachig.cjs.js",
+    "unpkg": "public/mehrsprachig.iife.js",
     "license": "MIT",
     "repository": "robinloeffel/mehrsprachig",
-    "module": "dist/mehrsprachig.esm.js",
-    "main": "dist/mehrsprachig.cjs.js",
-    "browser": "dist/mehrsprachig.iife.js",
+    "author": {
+        "name": "Robin Löffel",
+        "email": "hi@robinloeffel.ch",
+        "url": "robinloeffel.ch"
+    },
     "files": [
-        "mehrsprachig.js"
+        "public/mehrsprachig.*"
     ],
     "keywords": [
         "localization",
@@ -17,7 +20,6 @@
         "languages",
         "international"
     ],
-    "dependencies": {},
     "devDependencies": {
         "@rollup/plugin-buble": "^0.21.1",
         "@rollup/plugin-commonjs": "^11.0.2",
