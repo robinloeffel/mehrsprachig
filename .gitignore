@@ -1,10 +1,8 @@
 # folders
 node_modules
+public/mehrsprachig.*
 
-# os
-Thumbs.db
-ehthumbs.db
-Desktop.ini
+# macos
 .DS_Store
 .AppleDouble
 .LSOverride

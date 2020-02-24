@@ -1,6 +1,6 @@
 {
     "name": "mehrsprachig",
-    "version": "0.6.0-alpha0",
+    "version": "0.6.0-alpha1",
     "description": "The simplest way to make your app speak several languages",
     "main": "public/mehrsprachig.cjs.js",
     "unpkg": "public/mehrsprachig.iife.js",
@@ -12,6 +12,7 @@
         "url": "robinloeffel.ch"
     },
     "files": [
+        "index.js",
         "public/mehrsprachig.*"
     ],
     "keywords": [
