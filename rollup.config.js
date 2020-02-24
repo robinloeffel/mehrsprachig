@@ -7,7 +7,7 @@ import { eslint } from 'rollup-plugin-eslint';
 const dev = process.env.dev === 'true';
 
 const config = [{
-    input: 'mehrsprachig.js',
+    input: 'index.js',
     plugins: [
         eslint(),
         resolve(),
@@ -33,7 +33,7 @@ const config = [{
 
 if (!dev) {
     config.push({
-        input: 'mehrsprachig.js',
+        input: 'index.js',
         plugins: [
             resolve(),
             commonjs(),
