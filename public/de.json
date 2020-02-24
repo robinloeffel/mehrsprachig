@@ -1,10 +1,6 @@
 {
-    "meta": {
-        "description": "Mit mehrsprachig machst du deine Seite im Nu wortgewandt in allen Sprachen!",
-        "title": "mehrsprachig – Testseite"
-    },
-    "firstHeading": "Verpiss-dich-Pflanze",
-    "firstParagraph": "Die sogenannte Verpiss-dich-Pflanze ist eine als Sorte bezeichnete Art (Plectranthus ornatus) aus der Gattung der Harfensträucher (Plectranthus) innerhalb der Familie der Lippenblütler. Die Markteinführung geht auf den schwäbischen Gärtner und Züchter Dieter Stegmeier aus Essingen zurück. Er hat sie 2001 durch die Medien bekannt gemacht.",
-    "cuteSrc": "1.gif",
-    "cuteAlt": "Das Web surfen, Bruder"
+    "title": "mehrsprachig: Deutsch",
+    "german": "Deutsch",
+    "english": "Englisch",
+    "paragraph": "Ich bin jetzt Deutsch."
 }

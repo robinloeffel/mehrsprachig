@@ -1,6 +1,6 @@
 {
     "name": "mehrsprachig",
-    "version": "0.6.0",
+    "version": "0.6.0-alpha0",
     "description": "The simplest way to make your app speak several languages",
     "main": "public/mehrsprachig.cjs.js",
     "unpkg": "public/mehrsprachig.iife.js",
@@ -15,30 +15,42 @@
         "public/mehrsprachig.*"
     ],
     "keywords": [
-        "localization",
-        "locales",
-        "languages",
-        "international"
+        "translate",
+        "translations",
+        "languages"
     ],
+    "dependencies": {
+        "core-js": "^3.6.4",
+        "regenerator-runtime": "^0.13.3",
+        "whatwg-fetch": "^3.0.0"
+    },
     "devDependencies": {
-        "@rollup/plugin-buble": "^0.21.1",
+        "@babel/core": "^7.8.4",
+        "@babel/preset-env": "^7.8.4",
         "@rollup/plugin-commonjs": "^11.0.2",
         "@rollup/plugin-node-resolve": "^7.1.1",
         "eslint": "^6.7.2",
         "eslint-config-sweet": "^0.2.2",
         "rollup": "^1.27.8",
+        "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-eslint": "^7.0.0",
         "rollup-plugin-terser": "^5.1.2",
         "serve": "^11.3.0"
     },
     "scripts": {
-        "serve": "serve public",
+        "clean": "rm -rf public/mehrsprachig.*",
+        "serve": "yarn clean && serve public",
         "dev": "rollup -c -w --environment dev",
         "prod": "rollup -c -w",
         "start": "yarn serve & yarn dev",
-        "start:prod": "yarn serve & yarn prod"
+        "start:prod": "yarn serve & yarn prod",
+        "dist": "rollup -c"
     },
     "eslintConfig": {
         "extends": "sweet"
-    }
+    },
+    "browserslist": [
+        ">1%",
+        "not dead"
+    ]
 }

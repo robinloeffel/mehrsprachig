@@ -4,23 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" data-mehrsprachig="content=meta.description">
+    <meta name="description">
     <meta name="keywords" content="npm, yarn, i18n, internationalization, mehrsprachig, robin, löffel, javascript, js, package">
-    <title data-mehrsprachig="meta.title">mehrsprachig</title>
+    <title data-mehrsprachig="title">mehrsprachig</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://unpkg.com/modern-css-reset" rel="stylesheet">
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
 </head>
 
 <body>
-    <button type="button" data-mehrsprachig-trigger="de">deutsch</button>
-    <button type="button" data-mehrsprachig-trigger="en">english</button>
+    <button type="button" data-mehrsprachig-trigger="de" data-mehrsprachig="german">deutsch</button>
+    <button type="button" data-mehrsprachig-trigger="en" data-mehrsprachig="english">english</button>
 
-    <p data-mehrsprachig="intro">i ain't translated yet.</p>
+    <p data-mehrsprachig="paragraph">i ain't translated yet.</p>
 
     <script src="mehrsprachig.iife.js"></script>
     <script>
-        mehrsprachig();
+        mehrsprachig({
+            standard: 'de',
+            sources: {
+                de: 'de.json',
+                en: 'en.json'
+            }
+        });
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-import buble from '@rollup/plugin-buble';
+import babel from 'rollup-plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
@@ -6,14 +6,20 @@ import { eslint } from 'rollup-plugin-eslint';
 
 const dev = process.env.dev === 'true';
 
-const config = {
+const config = [{
     input: 'mehrsprachig.js',
     plugins: [
         eslint(),
         resolve(),
         commonjs(),
-        !dev && buble(),
-        !dev && terser({
+        !dev && babel({
+            presets: [[ '@babel/preset-env', {
+                useBuiltIns: 'usage',
+                corejs: 3
+            }]],
+            exclude: 'node_modules/**'
+        }),
+        terser({
             output: { comments: false }
         })
     ].filter(p => p),
@@ -23,7 +29,7 @@ const config = {
         name: 'mehrsprachig',
         file: 'public/mehrsprachig.iife.js'
     }
-};
+}];
 
 if (!dev) {
     config.push({
@@ -31,7 +37,13 @@ if (!dev) {
         plugins: [
             resolve(),
             commonjs(),
-            buble()
+            babel({
+                presets: [[ '@babel/preset-env', {
+                    useBuiltIns: 'usage',
+                    corejs: 3
+                }]],
+                exclude: 'node_modules/**'
+            })
         ],
         output: {
             sourcemap: true,
