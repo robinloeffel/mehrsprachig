@@ -39,18 +39,19 @@
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-eslint": "^7.0.0",
         "rollup-plugin-terser": "^5.1.2",
-        "serve": "^11.3.0",
-        "surge": "^0.21.3"
+        "serve": "^11.3.0"
     },
     "scripts": {
         "clean": "rm -rf public/mehrsprachig.*",
-        "serve": "yarn clean && serve public",
-        "dev": "rollup -c -w --environment dev",
-        "prod": "rollup -c -w",
-        "start": "yarn serve & yarn dev",
-        "start:prod": "yarn serve & yarn prod",
-        "deploy": "surge public https://mehrsprachig.surge.sh",
-        "dist": "yarn clean && rollup -c && yarn publish && yarn deploy"
+        "build": "yarn clean && rollup -c",
+        "watch": "yarn build -w",
+        "build:dev": "yarn watch --environment dev",
+        "build:prod": "yarn watch",
+        "serve": "serve public",
+        "dev": "yarn build:dev & yarn serve",
+        "prod": "yarn build:prod & yarn serve",
+        "release": "yarn clean && yarn build && yarn publish",
+        "start": "yarn dev"
     },
     "eslintConfig": {
         "extends": "sweet"

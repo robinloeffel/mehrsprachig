@@ -13,8 +13,14 @@ const mehrsprachig = ({
 
     const translate = langKey => {
         toTranslate.forEach(node => {
-            const prop = node.dataset.mehrsprachig;
-            node.innerText = locales[langKey][prop];
+            let locale = locales[langKey];
+            const name = selector.match(/^\[(.*)-(.*)\]$/)[2];
+            const props = node.dataset[name].split('.');
+
+            props.forEach(prop => {
+                locale = locale[prop];
+            });
+            node.innerText = locale;
         });
     };
 

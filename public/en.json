@@ -2,5 +2,8 @@
     "title": "mehrsprachig: English",
     "german": "German",
     "english": "English",
-    "paragraph": "I'm English now."
+    "paragraph": "I'm English now.",
+    "object": {
+        "prop": "Prop yes."
+    }
 }
