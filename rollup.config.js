@@ -12,13 +12,7 @@ const config = [{
         eslint(),
         resolve(),
         commonjs(),
-        !dev && babel({
-            presets: [[ '@babel/preset-env', {
-                useBuiltIns: 'usage',
-                corejs: 3
-            }]],
-            exclude: 'node_modules/**'
-        }),
+        !dev && babel(),
         terser({
             output: { comments: false }
         })
@@ -37,13 +31,7 @@ if (!dev) {
         plugins: [
             resolve(),
             commonjs(),
-            babel({
-                presets: [[ '@babel/preset-env', {
-                    useBuiltIns: 'usage',
-                    corejs: 3
-                }]],
-                exclude: 'node_modules/**'
-            })
+            babel()
         ],
         output: {
             sourcemap: true,
