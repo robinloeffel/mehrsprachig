@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { eslint } from 'rollup-plugin-eslint';
 
-const dev = process.env.dev === 'true';
+const development = process.env.dev === 'true';
 
 const config = [{
     input: 'index.js',
@@ -12,33 +12,40 @@ const config = [{
         eslint(),
         resolve(),
         commonjs(),
-        !dev && babel(),
-        terser({
-            output: { comments: false }
+        !development && babel(),
+        !development && terser({
+            output: {
+                comments: false
+            }
         })
     ].filter(p => p),
     output: {
-        sourcemap: true,
         format: 'iife',
         name: 'mehrsprachig',
         file: 'public/mehrsprachig.iife.js'
     }
+}, {
+    input: 'index.js',
+    plugins: [
+        resolve(),
+        commonjs(),
+        babel()
+    ],
+    output: {
+        format: 'cjs',
+        file: 'public/mehrsprachig.cjs.js'
+    }
+}, {
+    input: 'index.js',
+    plugins: [
+        resolve(),
+        commonjs(),
+        babel()
+    ],
+    output: {
+        format: 'esm',
+        file: 'public/mehrsprachig.esm.js'
+    }
 }];
-
-if (!dev) {
-    config.push({
-        input: 'index.js',
-        plugins: [
-            resolve(),
-            commonjs(),
-            babel()
-        ],
-        output: {
-            sourcemap: true,
-            format: 'cjs',
-            file: 'public/mehrsprachig.cjs.js'
-        }
-    });
-}
 
 export default config;

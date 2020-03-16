@@ -14,41 +14,41 @@ const mehrsprachig = ({
     const translate = langKey => {
         toTranslate.forEach(node => {
             let locale = locales[langKey];
-            const name = selector.match(/^\[(.*)-(.*)\]$/)[2];
-            const props = node.dataset[name].split('.');
+            const name = selector.match(/^\[(.*)-(.*)]$/)[2];
+            const properties = node.dataset[name].split('.');
 
-            props.forEach(prop => {
-                locale = locale[prop];
+            properties.forEach(property => {
+                locale = locale[property];
             });
-            node.innerText = locale;
+            node.textContent = locale;
         });
+        localStorage.setItem('mehrsprachig', langKey);
     };
 
-    const getLocale = async langKey => {
+    const changeLang = async langKey => {
         if (!locales[langKey]) {
             const response = await fetch(sources[langKey]);
             const data = await response.json();
-
             locales[langKey] = data;
         }
-
         translate(langKey);
-    };
-
-    const changeLang = langKey => {
-        getLocale(langKey);
     };
 
     const listener = event => {
         event.preventDefault();
-        changeLang(event.target.dataset.mehrsprachigTrigger);
+        const { mehrsprachigTrigger: langKey } = event.target.dataset;
+        changeLang(langKey);
     };
 
     toListen.forEach(node => {
         node.addEventListener('click', listener);
     });
 
-    changeLang(standard);
+    if (localStorage.getItem('mehrsprachig')) {
+        changeLang(localStorage.getItem('mehrsprachig'));
+    } else {
+        changeLang(standard);
+    }
 };
 
 export default mehrsprachig;
