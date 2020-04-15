@@ -10,14 +10,21 @@
     <link href="style.css" rel="stylesheet">
     <link href="https://unpkg.com/modern-css-reset" rel="stylesheet">
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+    <style>
+        html {
+            font-family: 'Inter', sans-serif;
+            font-size: 120%;
+        }
+    </style>
 </head>
 
 <body>
-    <button type="button" data-mehrsprachig-trigger="de" data-mehrsprachig="german">deutsch</button>
-    <button type="button" data-mehrsprachig-trigger="en" data-mehrsprachig="english">english</button>
+    <button type="button" data-mehrsprachig-trigger="de" data-mehrsprachig="german, name=german">deutsch</button>
+    <button type="button" data-mehrsprachig-trigger="en" data-mehrsprachig="english, name=english">english</button>
 
     <p data-mehrsprachig="paragraph">i ain't translated yet.</p>
     <span data-mehrsprachig="object.prop"></span>
+    <span data-mehrsprachig="html:html"></span>
 
     <script src="mehrsprachig.iife.js"></script>
     <script>

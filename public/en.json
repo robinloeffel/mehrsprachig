@@ -5,5 +5,6 @@
     "paragraph": "I'm English now.",
     "object": {
         "prop": "Prop yes."
-    }
+    },
+    "html": "<i>italic</i>"
 }

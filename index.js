@@ -11,17 +11,37 @@ const mehrsprachig = ({
     const toTranslate = document.querySelectorAll(selector);
     const toListen = document.querySelectorAll(trigger);
 
+    const localize = (langKey, value) => {
+        let localized = locales[langKey];
+
+        const array = value.split('.');
+        array.forEach(item => {
+            localized = localized[item];
+        });
+
+        return localized;
+    };
+
     const translate = langKey => {
         toTranslate.forEach(node => {
-            let locale = locales[langKey];
-            const name = selector.match(/^\[(.*)-(.*)]$/)[2];
-            const properties = node.dataset[name].split('.');
+            const values = node.dataset.mehrsprachig.replace(/ /g, '').split(',');
 
-            properties.forEach(property => {
-                locale = locale[property];
+            values.forEach(value => {
+                if (value.includes('=')) {
+                    const split = value.split('=');
+                    node[split[0]] = localize(langKey, split[1]);
+                    return;
+                }
+
+                if (value.includes('html:')) {
+                    node.innerHTML = localize(langKey, value.replace('html:', ''));
+                    return;
+                }
+
+                node.textContent = localize(langKey, value);
             });
-            node.textContent = locale;
         });
+
         localStorage.setItem('mehrsprachig', langKey);
     };
 

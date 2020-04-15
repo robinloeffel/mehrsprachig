@@ -14,13 +14,12 @@ const config = [{
         commonjs(),
         !development && babel(),
         !development && terser({
-            output: {
-                comments: false
-            }
+            output: { comments: false }
         })
     ].filter(p => p),
     output: {
         format: 'iife',
+        sourcemap: development,
         name: 'mehrsprachig',
         file: 'public/mehrsprachig.iife.js'
     }
@@ -29,8 +28,8 @@ const config = [{
     plugins: [
         resolve(),
         commonjs(),
-        babel()
-    ],
+        !development && babel()
+    ].filter(p => p),
     output: {
         format: 'cjs',
         file: 'public/mehrsprachig.cjs.js'
@@ -40,8 +39,8 @@ const config = [{
     plugins: [
         resolve(),
         commonjs(),
-        babel()
-    ],
+        !development && babel()
+    ].filter(p => p),
     output: {
         format: 'esm',
         file: 'public/mehrsprachig.esm.js'
