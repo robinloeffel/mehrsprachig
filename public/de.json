@@ -1,10 +1,10 @@
 {
-    "title": "mehrsprachig: Deutsch",
-    "german": "Deutsch",
-    "english": "Englisch",
-    "paragraph": "Ich bin jetzt Deutsch.",
-    "object": {
-        "prop": "Prop ja."
-    },
-    "html": "<i>kursiv</i>"
+  "title": "mehrsprachig: Deutsch",
+  "german": "Deutsch",
+  "english": "Englisch",
+  "paragraph": "Ich bin jetzt Deutsch.",
+  "object": {
+    "prop": "Prop ja."
+  },
+  "html": "<i>kursiv</i>"
 }

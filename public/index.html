@@ -7,13 +7,13 @@
     <meta name="description">
     <meta name="keywords" content="npm, yarn, i18n, internationalization, mehrsprachig, robin, löffel, javascript, js, package">
     <title data-mehrsprachig="title">mehrsprachig</title>
-    <link href="style.css" rel="stylesheet">
     <link href="https://unpkg.com/modern-css-reset" rel="stylesheet">
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <style>
         html {
             font-family: 'Inter', sans-serif;
             font-size: 120%;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -34,6 +34,10 @@
                 de: 'de.json',
                 en: 'en.json'
             }
+        });
+
+        document.addEventListener('mehrsprachigTranslated', e => {
+          console.log('changed language to', e.detail);
         });
     </script>
 </body>

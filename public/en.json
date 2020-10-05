@@ -1,10 +1,10 @@
 {
-    "title": "mehrsprachig: English",
-    "german": "German",
-    "english": "English",
-    "paragraph": "I'm English now.",
-    "object": {
-        "prop": "Prop yes."
-    },
-    "html": "<i>italic</i>"
+  "title": "mehrsprachig: English",
+  "german": "German",
+  "english": "English",
+  "paragraph": "I'm English now.",
+  "object": {
+    "prop": "Prop yes."
+  },
+  "html": "<i>italic</i>"
 }

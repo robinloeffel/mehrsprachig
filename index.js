@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import 'mdn-polyfills/CustomEvent';
 
 const mehrsprachig = ({
   selector = '[data-mehrsprachig]',
@@ -22,6 +23,11 @@ const mehrsprachig = ({
   };
 
   const translate = langKey => {
+    const event = new CustomEvent('mehrsprachigTranslated', {
+      detail: langKey,
+      bubbles: true
+    });
+
     toTranslate.forEach(node => {
       const values = node.dataset.mehrsprachig.replace(/ /g, '').split(',');
 
@@ -42,6 +48,7 @@ const mehrsprachig = ({
     });
 
     localStorage.setItem('mehrsprachig', langKey);
+    document.dispatchEvent(event);
   };
 
   const changeLang = async langKey => {
@@ -55,10 +62,7 @@ const mehrsprachig = ({
 
   const listener = event => {
     event.preventDefault();
-    const {
-      mehrsprachigTrigger: langKey
-    } = event.target.dataset;
-    changeLang(langKey);
+    changeLang(event.target.dataset.mehrsprachigTrigger);
   };
 
   toListen.forEach(node => {
