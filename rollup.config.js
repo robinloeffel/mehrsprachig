@@ -17,7 +17,7 @@ const external = [
 ];
 
 const config = [{
-  input: 'index.js',
+  input: 'source',
   plugins: [
     eslint(),
     resolve(),
@@ -46,7 +46,7 @@ const config = [{
 
 if (!development) {
   config.push({
-    input: 'index.js',
+    input: 'source',
     plugins: [
       resolve(),
       commonjs(),
@@ -63,7 +63,7 @@ if (!development) {
     },
     external
   }, {
-    input: 'index.js',
+    input: 'source',
     plugins: [
       resolve(),
       commonjs(),

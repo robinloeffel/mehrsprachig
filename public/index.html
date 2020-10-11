@@ -15,10 +15,15 @@
             font-size: 120%;
             line-height: 1.6;
         }
+
+        [data-mehrsprachig-cloak] {
+          visibility: hidden;
+          pointer-events: none;
+        }
     </style>
 </head>
 
-<body>
+<body data-mehrsprachig-cloak>
     <button type="button" data-mehrsprachig-trigger="de" data-mehrsprachig="german, name=german">deutsch</button>
     <button type="button" data-mehrsprachig-trigger="en" data-mehrsprachig="english, name=english">english</button>
 
@@ -36,8 +41,11 @@
             }
         });
 
-        document.addEventListener('mehrsprachigTranslated', e => {
-          console.log('changed language to', e.detail);
+        document.addEventListener('mehrsprachigTranslated', event => {
+          console.log('switched the language to', event.detail);
+          document.querySelectorAll('[data-mehrsprachig-cloak]').forEach(element => {
+            element.removeAttribute('data-mehrsprachig-cloak');
+          });
         });
     </script>
 </body>
