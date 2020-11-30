@@ -6,15 +6,11 @@ import eslint from '@rbnlffl/rollup-plugin-eslint';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
 
+import packageJson from './package.json';
+
+const external = Object.keys(packageJson.dependencies).map(dependency => new RegExp(`${dependency}`));
 const development = process.env.dev === 'true';
 const watch = process.env.ROLLUP_WATCH === 'true';
-const external = [
-  /core-js/,
-  /whatwg-fetch/,
-  /regenerator-runtime/,
-  /mdn-polyfills/,
-  /@babel/
-];
 
 const config = [{
   input: 'source',
@@ -26,7 +22,7 @@ const config = [{
       babelHelpers: 'bundled'
     }),
     !development && terser({
-      output: {
+      format: {
         comments: false
       }
     }),
@@ -39,7 +35,7 @@ const config = [{
   output: {
     format: 'iife',
     name: 'mehrsprachig',
-    file: 'public/mehrsprachig.iife.js',
+    file: packageJson.unpkg,
     sourcemap: development
   }
 }];
@@ -55,28 +51,16 @@ if (!development) {
         plugins: [ '@babel/plugin-transform-runtime' ]
       })
     ],
-    output: {
+    output: [{
       format: 'cjs',
-      file: 'public/mehrsprachig.cjs.js',
+      file: packageJson.main,
       sourcemap: true,
-      exports: 'default'
-    },
-    external
-  }, {
-    input: 'source',
-    plugins: [
-      resolve(),
-      commonjs(),
-      babel({
-        babelHelpers: 'runtime',
-        plugins: [ '@babel/plugin-transform-runtime' ]
-      })
-    ],
-    output: {
+      exports: 'auto'
+    }, {
       format: 'esm',
-      file: 'public/mehrsprachig.esm.js',
+      file: packageJson.module,
       sourcemap: true
-    },
+    }],
     external
   });
 }
