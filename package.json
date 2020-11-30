@@ -5,6 +5,7 @@
   "main": "public/mehrsprachig.cjs.js",
   "module": "public/mehrsprachig.esm.js",
   "unpkg": "public/mehrsprachig.iife.js",
+  "types": "types/index.d.ts",
   "license": "MIT",
   "repository": "robinloeffel/mehrsprachig",
   "author": {
@@ -17,6 +18,7 @@
   },
   "files": [
     "source",
+    "types",
     "public/mehrsprachig.*"
   ],
   "keywords": [
