@@ -6,6 +6,8 @@
 [![dependency status](https://img.shields.io/david/robinloeffel/mehrsprachig)](https://david-dm.org/robinloeffel/mehrsprachig)
 [![package license](https://img.shields.io/github/license/rbnlffl/mehrsprachig.svg)](license)
 
+> The simplest way to make your app speak several languages. 🗣
+
 "Mehrsprachig" is the German word for multilingual. So as you might've already guessed, this package allows you to add several localizations to your app or website in just the blink of an eye. It will make your creation _mehrsprachig_, so to speak.
 
 ## Installation
@@ -32,40 +34,35 @@ If that whole module bundling stuff is not your thing, don't worry! Add [`<scrip
 
 ## Configuration
 
-The following options, and their defaults, are available:
-
-```js
-mehrsprachig({
-  selector: '[data-mehrsprachig]',
-  trigger: '[data-mehrsprachig-trigger]',
-  standard: 'en',
-  sources: {}
-})
-```
+`mehrsprachig` accepts an options parameter, an object, containing the following (optional) props:
 
 ### `selector`
 
 Type: `string` ([`CSS selector`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors))<br>
-Default: `'[data-mehrsprachig]'`<br>
-Description: Is used to identify all the nodes that should be translated.
+Default: `'[data-mehrsprachig]'`
+
+Is used to identify all the nodes that should be translated.
 
 ### `trigger`
 
 Type: `string` ([`CSS selector`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors))<br>
-Default: `'[data-mehrsprachig-trigger]'`<br>
-Description: The nodes matching this selector will be attached a `click` event listener, triggering the change of the current language to whatever the attribute value of the selector is.
+Default: `'[data-mehrsprachig-trigger]'`
+
+The nodes matching this selector will be attached a `click` event listener, triggering the change of the current language to whatever the attribute value of the selector is.
 
 ### `standard`
 
 Type: `string`<br>
-Default: `'en'`<br>
-Description: The language that gets fetched if no `localStorage` item has been found. Schould match one of the keys of [`sources`](#sources).
+Default: `'en'`
+
+The language that gets fetched if no `localStorage` item has been found. Schould match one of the keys of [`sources`](#sources).
 
 ### `sources`
 
 Type: `object`<br>
-Default: `{}`<br>
-Description: An object containing key-value pairs pointing to the endpoints (URLs) of where the [localizations](#localizations) can be consumed from.
+Default: `{}`
+
+An object containing key-value pairs pointing to the endpoints (URLs) of where the [localizations](#localizations) can be consumed from.
 
 ## Localizations
 
