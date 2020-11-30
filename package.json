@@ -1,18 +1,21 @@
 {
   "name": "mehrsprachig",
-  "version": "0.7.0",
-  "description": "The simplest way to make your app speak several languages",
+  "version": "0.8.0",
+  "description": "The simplest way to make your app speak several languages. 🗣",
   "main": "public/mehrsprachig.cjs.js",
   "module": "public/mehrsprachig.esm.js",
   "unpkg": "public/mehrsprachig.iife.js",
   "types": "types/index.d.ts",
+  "repository": "https://github.com/robinloeffel/mehrsprachig.git",
+  "homepage": "https://github.com/robinloeffel/mehrsprachig",
+  "bugs": "https://github.com/robinloeffel/mehrsprachig/issues",
+  "author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
   "license": "MIT",
-  "repository": "robinloeffel/mehrsprachig",
-  "author": {
-    "name": "Robin Löffel",
-    "email": "hi@robinloeffel.ch",
-    "url": "https://robinloeffel.ch"
-  },
+  "keywords": [
+    "translate",
+    "translations",
+    "languages"
+  ],
   "engines": {
     "node": ">=10"
   },
@@ -20,11 +23,6 @@
     "source",
     "types",
     "public/mehrsprachig.*"
-  ],
-  "keywords": [
-    "translate",
-    "translations",
-    "languages"
   ],
   "dependencies": {
     "@babel/runtime": "^7.12.5",
