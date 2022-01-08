@@ -1,3 +1,8 @@
+# v1.0.1
+_08-01-2022_
+
+* Remove livereload script and sourcemaps from bundle *whoops*
+
 # v1.0.0
 _08-01-2022_
 

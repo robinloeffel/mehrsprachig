@@ -1,6 +1,6 @@
 {
   "name": "mehrsprachig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The simplest way to make your app speak several languages. 🗣",
   "main": "public/mehrsprachig.js",
   "browser": "public/mehrsprachig.iife.js",
@@ -37,6 +37,7 @@
     "watch": "yarn build -w",
     "start:dev": "yarn watch --environment dev",
     "start:prod": "yarn watch",
-    "start": "yarn start:dev"
+    "start": "yarn start:dev",
+    "prepublish": "yarn build"
   }
 }

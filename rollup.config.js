@@ -37,6 +37,7 @@ export default {
   }, {
     format: 'cjs',
     file: packageJson.main,
-    sourcemap: true
+    exports: 'default',
+    sourcemap: development
   }].filter(output => output)
 };
