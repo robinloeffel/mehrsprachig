@@ -1,3 +1,11 @@
+# v1.0.0
+_08-01-2022_
+
+* Breaking: Drop IE 11
+* Update devDependencies
+* Remove dependencies completely
+* Clean up source code
+
 # v0.8.0
 _30-11-2020_
 

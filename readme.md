@@ -2,8 +2,6 @@
 
 [![latest version on npm](https://img.shields.io/npm/v/mehrsprachig.svg)](https://www.npmjs.com/package/mehrsprachig)
 [![npm downloads a month](https://img.shields.io/npm/dm/mehrsprachig.svg)](https://www.npmjs.com/package/mehrsprachig)
-[![required node version](https://img.shields.io/node/v/mehrsprachig)](https://github.com/nodejs/Release)
-[![dependency status](https://img.shields.io/david/robinloeffel/mehrsprachig)](https://david-dm.org/robinloeffel/mehrsprachig)
 [![package license](https://img.shields.io/github/license/rbnlffl/mehrsprachig.svg)](license)
 
 > The simplest way to make your app speak several languages. 🗣
@@ -50,7 +48,7 @@ Default: `'[data-mehrsprachig-trigger]'`
 
 The nodes matching this selector will be attached a `click` event listener, triggering the change of the current language to whatever the attribute value of the selector is.
 
-### `standard`
+### `fallback`
 
 Type: `string`<br>
 Default: `'en'`
@@ -120,11 +118,11 @@ You betcha! If you want `mehrsprachig` to localize the `content` attribute of so
 
 ## Events
 
-`mehrsprachig` emits a `mehrsprachigTranslated` event on the `document` on page load, as well as on every language page. It contains the language key of the locale to which has been switched to in the `detail` property.
+`mehrsprachig` emits a `mehrsprachigTranslated` event on the `element` it just translated. It contains `localeKey`, `element`, `propertyToLocalize`, `localizedPropertyValue` in its `detail` prop.
 
 ```js
-document.addEventListener('mehrsprachigTranslated', e => {
-  console.log(`the language has been switched to ${e.detail}`);
+document.addEventListener('mehrsprachigTranslated', event => {
+  console.log(`the language has been switched to ${event.detail.localeKey}!`);
 });
 ```
 

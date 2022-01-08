@@ -5,7 +5,7 @@ interface Sources {
 interface MehrsprachigOptions {
   selector?: string,
   trigger?: string,
-  standard?: string,
+  fallback?: string,
   sources?: Sources
 }
 

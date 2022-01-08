@@ -1,79 +1,84 @@
-import 'whatwg-fetch';
-import 'mdn-polyfills/CustomEvent';
-
-const mehrsprachig = ({
+export default ({
   selector = '[data-mehrsprachig]',
   trigger = '[data-mehrsprachig-trigger]',
-  standard = 'en',
+  fallback = 'en',
   sources = {}
 } = {}) => {
-  const locales = {};
+  const cachedLocales = {};
   const toTranslate = document.querySelectorAll(selector);
-  const toListen = document.querySelectorAll(trigger);
+  const triggers = document.querySelectorAll(trigger);
 
-  const localize = (langKey, value) => {
-    let localized = locales[langKey];
+  const localize = (localeKey, propertyToFind) => {
+    const newLocale = cachedLocales[localeKey];
 
-    const array = value.split('.');
-    array.forEach(item => {
-      localized = localized[item];
-    });
-
-    return localized;
+    // find the provided prop, which may be nested,
+    // inside newLocale and return that prop's value
+    return propertyToFind.split('.').reduce(
+      (previousValue, currentValue) => previousValue[currentValue], newLocale
+    );
   };
 
-  const translate = langKey => {
-    const event = new CustomEvent('mehrsprachigTranslated', {
-      detail: langKey,
-      bubbles: true
-    });
+  const translate = localeKey => {
+    toTranslate.forEach(element => {
+      const propertiesToLocalize = element.dataset.mehrsprachig.replace(/ /g, '').split(',');
 
-    toTranslate.forEach(node => {
-      const values = node.dataset.mehrsprachig.replace(/ /g, '').split(',');
+      propertiesToLocalize.forEach(propertyToLocalize => {
+        let localizedPropertyValue = '';
 
-      values.forEach(value => {
-        if (value.includes('=')) {
-          const split = value.split('=');
-          node[split[0]] = localize(langKey, split[1]);
-          return;
+        if (propertyToLocalize.includes('=')) {
+          // manipulating an element's property's content
+          const [ elementPropertyName, elementPropertyValue ] = propertyToLocalize.split('=');
+          localizedPropertyValue = localize(localeKey, elementPropertyValue);
+          element[elementPropertyName] = localizedPropertyValue;
+        } else if (propertyToLocalize.includes('html:')) {
+          // manipulating an element's html content
+          localizedPropertyValue = localize(localeKey, propertyToLocalize.replace('html:', ''));
+          element.innerHTML = localizedPropertyValue;
+        } else {
+          // manipulating an element's text content
+          localizedPropertyValue = localize(localeKey, propertyToLocalize);
+          element.textContent = localizedPropertyValue;
         }
 
-        if (value.includes('html:')) {
-          node.innerHTML = localize(langKey, value.replace('html:', ''));
-          return;
-        }
-
-        node.textContent = localize(langKey, value);
+        const mehrsprachigTranslatedEvent = new CustomEvent('mehrsprachigTranslated', {
+          bubbles: true,
+          detail: {
+            localeKey,
+            element,
+            propertyToLocalize,
+            localizedPropertyValue
+          }
+        });
+        element.dispatchEvent(mehrsprachigTranslatedEvent);
       });
     });
 
-    localStorage.setItem('mehrsprachig', langKey);
-    document.dispatchEvent(event);
+    localStorage.setItem('mehrsprachig', localeKey);
   };
 
-  const changeLang = async langKey => {
-    if (!locales[langKey]) {
-      const response = await fetch(sources[langKey]);
-      const data = await response.json();
-      locales[langKey] = data;
+  const changeLanguage = async localeKey => {
+    if (!cachedLocales[localeKey]) {
+      const fetchResponse = await fetch(sources[localeKey]);
+      const fetchedLocale = await fetchResponse.json();
+      cachedLocales[localeKey] = fetchedLocale;
     }
-    translate(langKey);
+
+    translate(localeKey);
   };
 
-  const listener = event => {
+  const handleTriggerClick = event => {
+    const { mehrsprachigTrigger: localeKey } = event.target.dataset;
+    changeLanguage(localeKey);
     event.preventDefault();
-    changeLang(event.target.dataset.mehrsprachigTrigger);
   };
 
-  toListen.forEach(node => {
-    node.addEventListener('click', listener);
+  triggers.forEach(element => {
+    element.addEventListener('click', handleTriggerClick);
   });
 
   if (localStorage.getItem('mehrsprachig')) {
-    changeLang(localStorage.getItem('mehrsprachig'));
+    changeLanguage(localStorage.getItem('mehrsprachig'));
   } else {
-    changeLang(standard);
+    changeLanguage(fallback);
   }
 };
-
-export default mehrsprachig;

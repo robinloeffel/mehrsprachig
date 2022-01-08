@@ -1,4 +1,3 @@
-import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
@@ -8,61 +7,36 @@ import serve from 'rollup-plugin-serve';
 
 import packageJson from './package.json';
 
-const external = Object.keys(packageJson.dependencies).map(dependency => new RegExp(`${dependency}`));
 const development = process.env.dev === 'true';
 const watch = process.env.ROLLUP_WATCH === 'true';
 
-const config = [{
+export default {
   input: 'source',
   plugins: [
     eslint(),
     resolve(),
     commonjs(),
-    !development && babel({
-      babelHelpers: 'bundled'
-    }),
-    !development && terser({
-      format: {
-        comments: false
-      }
-    }),
     watch && serve({
       open: true,
       contentBase: 'public'
     }),
     watch && livereload('public')
-  ],
-  output: {
+  ].filter(plugin => plugin),
+  output: [{
     format: 'iife',
     name: 'mehrsprachig',
-    file: packageJson.unpkg,
-    sourcemap: development
-  }
-}];
-
-if (!development) {
-  config.push({
-    input: 'source',
+    file: packageJson.browser,
+    sourcemap: development,
     plugins: [
-      resolve(),
-      commonjs(),
-      babel({
-        babelHelpers: 'runtime',
-        plugins: [ '@babel/plugin-transform-runtime' ]
+      terser({
+        format: {
+          comments: false
+        }
       })
-    ],
-    output: [{
-      format: 'cjs',
-      file: packageJson.main,
-      sourcemap: true,
-      exports: 'auto'
-    }, {
-      format: 'esm',
-      file: packageJson.module,
-      sourcemap: true
-    }],
-    external
-  });
-}
-
-export default config;
+    ]
+  }, {
+    format: 'cjs',
+    file: packageJson.main,
+    sourcemap: true
+  }].filter(output => output)
+};
